@@ -1,0 +1,1 @@
+;You can put your custom autohotkey code in here, it is loaded as a seperate AHK script

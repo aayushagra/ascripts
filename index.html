@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Argoscripts 0.1!</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <style>
+      .nopadding {
+         padding: 0 !important;
+         margin: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <center><h1>Argoscripts is locked and loaded!</h1></center>
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-danger" id="newrow">New row</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-success" id="saverows">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="container-fluid" id="cnt">
+    </div>
+  </body>
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+  <!-- normal script imports etc  -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.js"></script>  
+
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+  
+  <script>
+    require('./renderer.js')
+  </script>
+</html>
