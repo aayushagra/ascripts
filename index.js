@@ -229,7 +229,7 @@ function ClearLockFiles(modules){
 }
 
 function SendChatMessageCallbacks(modules, line){
-	console.log(playername);
+	//console.log(playername);
 	if(playername == null) return 1; //No messages are sent till the player name is set
 	spammy.log("SendChatMessageCallbacks");
 	for(var i = 0; i < modules.length; i++){
