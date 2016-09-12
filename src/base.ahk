@@ -1,13 +1,14 @@
 #SingleInstance ignore
+#HotkeyModifierTimeout 0
 
 FileRemoveDir, %A_WorkingDir%\lockfiles, 1
 FileCreateDir, %A_WorkingDir%\lockfiles
 
+global lastfilereaddir := "false"
+sampactive := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
-
-sampactive := 0
 
 CloseMailWarnings:
    GetKeyState, state, w
@@ -61,6 +62,13 @@ CloseMailWarnings:
             FileDelete, %A_WorkingDir%\lockfiles\sampactive.lock
         }
     }
+
+    if not (lastfilereaddir = "false")
+    {
+      FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_%lastfilereaddir%.lock
+      lastfilereaddir := "false"
+    }
+
 return
 
 #IfWinActive, GTA:SA:MP

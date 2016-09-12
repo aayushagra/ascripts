@@ -1,23 +1,20 @@
 #SingleInstance ignore
+#HotkeyModifierTimeout 0
 
 FileRemoveDir, %A_WorkingDir%\lockfiles, 1
 FileCreateDir, %A_WorkingDir%\lockfiles
 
+global lastfilereaddir := "false"
+sampactive := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
 
-sampactive := 0
-buttonpressed = 0
-
 CloseMailWarnings:
    GetKeyState, state, w
    if state = D
-      if buttonpressed = 0
+      IfExist, %A_WorkingDir%\lockfiles\fuelrelease.lock
       {
-        Sleep, 100
-        SendInput, t/fillup{ENTER}
-        SendInput, t/engine{ENTER}
         FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\fuelrelease.lock
       }
         
@@ -65,31 +62,38 @@ CloseMailWarnings:
             FileDelete, %A_WorkingDir%\lockfiles\sampactive.lock
         }
     }
+
+    if not (lastfilereaddir = "false")
+    {
+      FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_%lastfilereaddir%.lock
+      lastfilereaddir := "false"
+    }
+
 return
 
 #IfWinActive, GTA:SA:MP
 
 ^!b Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTBCTRL.lock
+	lastfilereaddir := "ALTBCTRL"
 return
 !e Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTE.lock
+	lastfilereaddir := "ALTE"
 return
 !r Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTR.lock
+	lastfilereaddir := "ALTR"
 return
 !1 Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_1ALT.lock
+	lastfilereaddir := "1ALT"
 return
 !2 Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_2ALT.lock
+	lastfilereaddir := "2ALT"
 return
 !3 Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_3ALT.lock
+	lastfilereaddir := "3ALT"
 return
 !4 Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_4ALT.lock
+	lastfilereaddir := "4ALT"
 return
 ^!a Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_AALTCTRL.lock
+	lastfilereaddir := "AALTCTRL"
 return

@@ -95,7 +95,7 @@ function main(modules){
 		//SendTicks(modules);
 		CheckAnyHotkeysPressed(modules);
 		currentlyexecuting = false;
-	}, 50);
+	}, 25);
 }
 
 function CheckForPlayerName(data) {
@@ -171,7 +171,7 @@ function CompileAHKFile(){
 		for(var j = 0; j < hotkeys[i][0].length; j++){
 			switch(hotkeys[i][0][j]) {
 				case "CTRL":
-					releasestring += "{Ctrl Up}";
+					releasestring += "\n\tKeyWait, Ctrl"
 					ahkstring = "^" + ahkstring;
 					//ahkstring += "^";
 					break;
@@ -181,12 +181,12 @@ function CompileAHKFile(){
 					//ahkstring += "#";
 					break;
 				case "ALT":
-					releasestring += "{Alt Up}";
+					releasestring += "\n\tKeyWait, Alt";
 					ahkstring = "!" + ahkstring;
 					//ahkstring += "!";
 					break;
 				case "SHIFT":
-					releasestring += "{Shift Up}";
+					releasestring += "\n\tKeyWait, Shift";
 					ahkstring = "+" + ahkstring;
 					//ahkstring += "+";
 					break;
@@ -195,8 +195,8 @@ function CompileAHKFile(){
 					break;			
 			}
 		}
-		var appendString = "\n"+ahkstring+" Up::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock\nreturn";
-		//var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock\n\tSend, "+releasestring+"\nreturn";
+		var appendString = "\n"+ahkstring+" Up::\n\tlastfilereaddir := \""+hotkeys[i][0].join("")+"\"\nreturn";
+		//var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock"+releasestring+"\nreturn";
 		fs.appendFileSync('argo.ahk', appendString);
 	}
 	setTimeout(ReloadAHKFile, 2000);
