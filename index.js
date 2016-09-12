@@ -153,22 +153,27 @@ function CompileAHKFile(){
 	fs.writeFileSync('argo.ahk', fs.readFileSync('base.ahk'));
 	for(var i = 0; i < hotkeys.length; i++){
 		var ahkstring = "";
+		var releasestring = "";
 		console.log(hotkeys[i][0]);
 		for(var j = 0; j < hotkeys[i][0].length; j++){
 			switch(hotkeys[i][0][j]) {
 				case "CTRL":
+					releasestring += "{Ctrl Up}";
 					ahkstring = "^" + ahkstring;
 					//ahkstring += "^";
 					break;
 				case "WIN":
+					//releasestring += "{ Up}"; //Currently nothing since there are two windows keys and no global Win key according to ahk's docs and we dont wanna accidentally trigger a hotkey on the wrong one
 					ahkstring = "#" + ahkstring;
 					//ahkstring += "#";
 					break;
 				case "ALT":
+					releasestring += "{Alt Up}";
 					ahkstring = "!" + ahkstring;
 					//ahkstring += "!";
 					break;
 				case "SHIFT":
+					releasestring += "{Shift Up}";
 					ahkstring = "+" + ahkstring;
 					//ahkstring += "+";
 					break;
@@ -177,7 +182,8 @@ function CompileAHKFile(){
 					break;			
 			}
 		}
-		var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock\nreturn";
+		var appendString = "\n"+ahkstring+" Up::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock\nreturn";
+		//var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock\n\tSend, "+releasestring+"\nreturn";
 		fs.appendFileSync('argo.ahk', appendString);
 	}
 	setTimeout(ReloadAHKFile, 2000);

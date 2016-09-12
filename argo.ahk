@@ -7,6 +7,8 @@ FileCreateDir, %A_WorkingDir%\lockfiles
 SetTimer, CloseMailWarnings, 50
 return
 
+sampactive := 0
+
 CloseMailWarnings:
    GetKeyState, state, w
    if state = D
@@ -81,34 +83,39 @@ CloseMailWarnings:
     ;
     ;  FileDelete, %A_WorkingDir%\lockfiles\sendmsg.lock
     ;}
+
+    IfWinActive GTA:SA:MP
+    {
+        if (sampactive = 0)
+        {
+            sampactive := 1
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\sampactive.lock
+            FileDelete, %A_WorkingDir%\lockfiles\sampinactive.lock
+        }
+    }
+
+    IfWinNotActive GTA:SA:MP
+    {
+        if (sampactive = 1)
+        {
+            sampactive := 0
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\sampinactive.lock
+            FileDelete, %A_WorkingDir%\lockfiles\sampactive.lock
+        }
+    }
 return
 
 #IfWinActive, GTA:SA:MP
 
-^!b::
+^!b Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTBCTRL.lock
 return
-!e::
+!e Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTE.lock
 return
-!r::
+!r Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTR.lock
 return
-!1::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_1ALT.lock
-return
-!2::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_2ALT.lock
-return
-!3::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_3ALT.lock
-return
-!4::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_4ALT.lock
-return
-!6::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_6ALT.lock
-return
-^!a::
+^!a Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_AALTCTRL.lock
 return

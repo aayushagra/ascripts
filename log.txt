@@ -1,13 +1,13 @@
 
+[ { Combination: [ 'ALT', 'E', 'N/A', 'N/A' ],
+    Output: [ '/engine' ] },
+  { Combination: [ 'ALT', 'R', 'N/A', 'N/A' ],
+    Output: [ '/engine', '/repairvehicle', '/engine' ] } ]
 [ 'ALT', 'B', 'CTRL' ]
 [ 'ALT', 'E' ]
 [ 'ALT', 'R' ]
-[ '1', 'ALT' ]
-[ '2', 'ALT' ]
-[ '3', 'ALT' ]
-[ '4', 'ALT' ]
-[ '6', 'ALT' ]
 [ 'A', 'ALT', 'CTRL' ]
 MAIN CALLED
 Loaded 4 plugins
 C:\Users\aayush\Documents\GTA San Andreas User Files\SAMP\chatlog.txt
+^C
