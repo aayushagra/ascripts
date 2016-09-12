@@ -1,0 +1,37 @@
+[
+  {
+    "Combination": [
+      "ALT",
+      "E",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/engine"
+    ]
+  },
+  {
+    "Combination": [
+      "ALT",
+      "R",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/engine",
+      "/repairvehicle",
+      "/engine"
+    ]
+  },
+  {
+    "Combination": [
+      "ALT",
+      "1",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/producemeth"
+    ]
+  }
+]
