@@ -59,7 +59,7 @@ function createWindow () {
       }
     }
   ]);
-  appIcon.setToolTip('This is my application.');
+  appIcon.setToolTip('Exterminator\'s keybinder');
   appIcon.setContextMenu(contextMenu);
   //setTimeout(hide, 5000);
   //setTimeout(show, 10000);

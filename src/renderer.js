@@ -101,6 +101,7 @@ function saveObjToFile(newobj){
 }
 
 function newRow(event){
+	saveRows("true");
 	var targetElement = event.target || event.srcElement;
 	console.log(targetElement.id);
 	obj.push({Combination: ["N/A","N/A","N/A","N/A"], Output: [""]});

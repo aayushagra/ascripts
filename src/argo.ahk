@@ -8,12 +8,16 @@ SetTimer, CloseMailWarnings, 50
 return
 
 sampactive := 0
+buttonpressed = 0
 
 CloseMailWarnings:
    GetKeyState, state, w
    if state = D
-      IfExist, %A_WorkingDir%\lockfiles\fuelrelease.lock
+      if buttonpressed = 0
       {
+        Sleep, 100
+        SendInput, t/fillup{ENTER}
+        SendInput, t/engine{ENTER}
         FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\fuelrelease.lock
       }
         
@@ -23,37 +27,6 @@ CloseMailWarnings:
       {
         FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\fuelrelease.lock
       }
-
-    IfExist, %A_WorkingDir%\lockfiles\dostartenginecmd.lock
-    {
-        SendInput, t^a{Backspace}/engine{ENTER}
-        FileDelete, %A_WorkingDir%\lockfiles\dostartenginecmd.lock
-    }
-
-    IfExist, %A_WorkingDir%\lockfiles\dofillupcmd.lock
-    {
-        SendInput, t^a{Backspace}/fillup{ENTER}
-        FileDelete, %A_WorkingDir%\lockfiles\dofillupcmd.lock
-    }
-
-    IfExist, %A_WorkingDir%\lockfiles\doyocmd.lock
-    {
-        SendInput, tyo{ENTER}
-        FileDelete, %A_WorkingDir%\lockfiles\doyocmd.lock
-    }
-
-    IfExist, %A_WorkingDir%\lockfiles\dofillupreleasecmd.lock
-    {
-        SendInput, t/fillup{ENTER}
-        SendInput, t/engine{ENTER}
-        FileDelete, %A_WorkingDir%\lockfiles\dofillupreleasecmd.lock
-    }
-
-    IfExist, %A_WorkingDir%\lockfiles\paytoll.lock
-    {
-        SendInput, t^a{Backspace}/paytoll{ENTER}
-        FileDelete, %A_WorkingDir%\lockfiles\paytoll.lock
-    }
 
     IfExist, %A_WorkingDir%\lockfiles\reloadahk.lock
     {
@@ -72,17 +45,6 @@ CloseMailWarnings:
         ;MsgBox, yo
         FileDelete, %A_WorkingDir%\lockfiles\sendmsg.lock
     }
-
-    ;IfExist, %A_WorkingDir%\lockfiles\sendmsg.lock
-    ;{
-    ;  Loop, read, %A_WorkingDir%\lockfiles\sendmsg.lock
-    ;  { 
-    ;    SendInput, %A_LoopReadLine%
-    ;    Sleep, 50
-    ;  }
-    ;
-    ;  FileDelete, %A_WorkingDir%\lockfiles\sendmsg.lock
-    ;}
 
     IfWinActive GTA:SA:MP
     {
@@ -118,6 +80,15 @@ return
 return
 !1 Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_1ALT.lock
+return
+!2 Up::
+	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_2ALT.lock
+return
+!3 Up::
+	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_3ALT.lock
+return
+!4 Up::
+	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_4ALT.lock
 return
 ^!a Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_AALTCTRL.lock

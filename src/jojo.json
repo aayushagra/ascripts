@@ -33,5 +33,38 @@
     "Output": [
       "/producemeth"
     ]
+  },
+  {
+    "Combination": [
+      "ALT",
+      "2",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/use lithium"
+    ]
+  },
+  {
+    "Combination": [
+      "ALT",
+      "3",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/use red phosphorus"
+    ]
+  },
+  {
+    "Combination": [
+      "ALT",
+      "4",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/collectmeth"
+    ]
   }
 ]

@@ -2,7 +2,6 @@
 //No known bugs caused, might have to be redeleted on updating
 
 var fs = require('fs');
-//var robot = require("robotjs");
 var math = require('mathjs');
 var path = require('path'),
     walk = require('walk');
@@ -10,7 +9,6 @@ var path = require('path'),
 var windows_homedir = require('os').homedir();
 var hotkeys = [];
 var hotkeys_jsonstring = ""; //Used for efficiently checking if a hotkey is registered
-var windows_username = require('username').sync();
 
 var spammy = {};
 spammy.log = function () {
@@ -70,7 +68,6 @@ function main(modules){
 	console.log("Loaded " + modules.length + " plugins");
 	console.log(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
 	var data =  fs.readFileSync(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
-	//var data =  fs.readFileSync("C:\\Users\\"+windows_username+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
 	//var data =  fs.readFileSync("D:\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
 	var chatlog_pointer = GetLineCount(data);
 
@@ -103,9 +100,22 @@ function main(modules){
 
 function CheckForPlayerName(data) {
 	//console.log(line.match());
+	var lines = data.split(/\r?\n/);
+	//This is excessive 
+	for (var i = 0; i < lines.length; i++)
+	{
+		//console.log(lines[i]);
+		if(lines[i].match(/^\[\d\d:\d\d:\d\d\] You have successfully logged in,/) !== null ||
+		   lines[i].match(/^\[\d\d:\d\d:\d\d\] Welcome back, /) !== null) { //Welcome back msg is shown to admins
+			var split = lines[i].split(" ");
+			var name = split[split.length-1];
+			playername = name.slice(0, -2);
+		}
+
+	}
 	if(data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./) !== null){
 		//console.log(data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./)[1]);
-		playername = data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./)[1];
+		//playername = data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./)[1];
 	}
 }
 
