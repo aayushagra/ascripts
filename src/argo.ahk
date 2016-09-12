@@ -110,9 +110,6 @@ return
 ^!b Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTBCTRL.lock
 return
-^!a Up::
-	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_AALTCTRL.lock
-return
 !e Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_ALTE.lock
 return
@@ -121,4 +118,7 @@ return
 return
 !1 Up::
 	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_1ALT.lock
+return
+^!a Up::
+	FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_AALTCTRL.lock
 return
