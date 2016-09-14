@@ -8,7 +8,7 @@ var hotkeyarray = [];
 module.exports = {
   OnModuleInit: function(fargoscripts){
     argoscripts = fargoscripts;
-    obj = JSON.parse(fs.readFileSync('jojo.json', 'utf8'));
+    obj = JSON.parse(fs.readFileSync('../hotkeys.json', 'utf8'));
     console.log(obj);
     for(var i = 0; i < obj.length; i++){
       hotkeyarray = obj[i]["Combination"].filter(function(e) { return e !== 'N/A' })
@@ -28,6 +28,9 @@ module.exports = {
     return listhotkeys_array;
   },
   OnChatMessageCaptured: function(line) {
+  },
+  OnNewChatlogStarted: function(data) {
+    
   },
   OnTick: function(){
   	

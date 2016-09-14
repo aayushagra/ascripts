@@ -30,6 +30,9 @@ module.exports = {
 		  }
 	}
   },
+  OnNewChatlogStarted: function(data) {
+    
+  },
   OnTick: function(){
   	
   }

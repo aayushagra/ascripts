@@ -30,8 +30,12 @@ module.exports = {
       console.log("triggered");
   		fuelrelease = true;
       //argoscripts.SetLockFile('dofillupcmd');
+      argoscripts.SendMessageToSAMP("/filljerrycan");
       argoscripts.SendMessageToSAMP("/fillup");
   	}
+  },
+  OnNewChatlogStarted: function(data) {
+    
   },
   OnTick: function(){
   	if(fuelrelease == true){

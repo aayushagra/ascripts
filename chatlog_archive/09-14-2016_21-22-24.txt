@@ -1,0 +1,19 @@
+[21:22:24] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:22:27] Connecting to 46.105.234.125:7777...
+[21:22:29] Connected. Joining the game...
+[21:22:35] Connected to {B9C9BF}Argonath RPG
+[21:22:35] {72A8D4}Welcome to Argonath RPG RS5.2!
+[21:22:35] ------------------------------------------------------------------------------------------
+[21:22:35] 1. {72A8D4}This is a roleplay server, please stay within decent realms of roleplay.
+[21:22:35] 2. {72A8D4}Please contact a helper if you have any questions by using the command /h [question]
+[21:22:35] 3. {72A8D4}Please do not deathmatch, carkill, flame or hack on this server, all are punishable.
+[21:22:35] 4. {72A8D4}Treat others as you would want to be treated, you will enjoy playing more!
+[21:22:35] 5. {72A8D4}Our full rules can be found at www.ArgonathRPG.eu or /rules
+[21:22:35] ------------------------------------------------------------------------------------------
+[21:22:35] The login screen will appear shortly. Please wait.
+[21:22:41] You have successfully logged in, Philip_Ancelotti.
+[21:22:41] Philip_Ancelotti(20) has logged into the server.
+[21:22:41] You have joined channel 1335. Owner: Comrey_Ancelotti
+[21:22:41] Channel Message: La Famiglia di Ancelotti
+[21:22:43] You are now entering Los Santos city boundaries. Mayor: caion
+[21:22:46] You are now entering San Fierro city boundaries. Mayor: Sam_Valenti

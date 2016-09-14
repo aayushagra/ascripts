@@ -73,9 +73,6 @@ return
 
 #IfWinActive, GTA:SA:MP
 
-^!b Up::
-	lastfilereaddir := "ALTBCTRL"
-return
 !e Up::
 	lastfilereaddir := "ALTE"
 return
@@ -93,6 +90,9 @@ return
 return
 !4 Up::
 	lastfilereaddir := "4ALT"
+return
+^!b Up::
+	lastfilereaddir := "ALTBCTRL"
 return
 ^!a Up::
 	lastfilereaddir := "AALTCTRL"

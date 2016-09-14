@@ -1,0 +1,33 @@
+[21:38:30] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:38:33] Connecting to 46.105.234.125:7777...
+[21:38:34] Connected. Joining the game...
+[21:38:40] Connected to {B9C9BF}Argonath RPG
+[21:38:40] {72A8D4}Welcome to Argonath RPG RS5.2!
+[21:38:40] ------------------------------------------------------------------------------------------
+[21:38:40] 1. {72A8D4}This is a roleplay server, please stay within decent realms of roleplay.
+[21:38:40] 2. {72A8D4}Please contact a helper if you have any questions by using the command /h [question]
+[21:38:40] 3. {72A8D4}Please do not deathmatch, carkill, flame or hack on this server, all are punishable.
+[21:38:40] 4. {72A8D4}Treat others as you would want to be treated, you will enjoy playing more!
+[21:38:40] 5. {72A8D4}Our full rules can be found at www.ArgonathRPG.eu or /rules
+[21:38:40] ------------------------------------------------------------------------------------------
+[21:38:40] The login screen will appear shortly. Please wait.
+[21:38:47] You have successfully logged in, Philip_Ancelotti.
+[21:38:47] Philip_Ancelotti(21) has logged into the server.
+[21:38:47] You have joined channel 1335. Owner: Comrey_Ancelotti
+[21:38:47] Channel Message: La Famiglia di Ancelotti
+[21:38:50] {FFFFFF}Sergei_Timofeyev{FFFFFF}: (4) Not that much Bogo.
+[21:38:50] {DEB887}Bogomil{FFFFFF}: (13) if you know how to use it
+[21:38:50] {DEB887}Bogomil{FFFFFF}: (13) if you know how to use it
+[21:39:45] {409FFF}Scott_Stracci{FFFFFF}: (34)  /store and /load was usefull
+[21:39:45] You are now entering San Fierro city boundaries. Mayor: Sam_Valenti
+[21:39:45] {409FFF}Scott_Stracci{FFFFFF}: (34) l
+[21:39:45] {DEB887}Kiyo{FFFFFF}: (10) how to set character
+[21:39:45] {DEB887}Bogomil{FFFFFF}: (13) indeed
+[21:39:45] {FFFFFF}Sergei_Timofeyev{FFFFFF}: (4) Teddy said /store, and /load can't be added on RS5.
+[21:39:45] {409FFF}Scott_Stracci{FFFFFF}: (34) who gives a fuck about some complicated container script
+[21:39:45] Tixar_Grey(26) has logged into the server.
+[21:39:45] {FFFFFF}Sergei_Timofeyev{FFFFFF}: (4) /character is not as useful as player's RP skills.
+[21:39:45] {FFFFFF}[GSF]Traser{FFFFFF}: (2) How complicated the scripts are for dedicated and old players how difficult is becomes for new
+[21:39:47] {FFFFFF}[GSF]Traser{FFFFFF}: (2) players ;)
+[21:39:52] {FFFFFF}Sergei_Timofeyev{FFFFFF}: (4) So even if you have a perfect RP story, it won't change anything.
+[21:40:10] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started

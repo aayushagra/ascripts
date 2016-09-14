@@ -73,6 +73,7 @@ function main(modules){
 	console.log("Loaded " + modules.length + " plugins");
 	console.log(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
 	var data =  fs.readFileSync(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
+	SendNewChatlogStartedCallbacks(data, modules);
 	//var data =  fs.readFileSync("D:\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
 	var chatlog_pointer = GetLineCount(data);
 
@@ -86,6 +87,8 @@ function main(modules){
 		//data =  fs.readFileSync("D:\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
 		if(data.length < last_data.length){
 			chatlog_pointer = 0; //New game started
+			console.log("New game started");
+			SendNewChatlogStartedCallbacks(data, modules);
 			ClearLockFiles();
 		}
 		if (data.length > last_data.length) {
@@ -101,6 +104,13 @@ function main(modules){
 		CheckAnyHotkeysPressed(modules);
 		currentlyexecuting = false;
 	}, 25);
+}
+
+function SendNewChatlogStartedCallbacks(data, modules){
+	spammy.log("SendNewChatlogStartedCallbacks");
+	for(var i = 0; i < modules.length; i++){
+		modules[i].OnNewChatlogStarted(data, windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
+	}
 }
 
 function CheckForPlayerName(data) {
@@ -247,7 +257,12 @@ function ClearLockFiles(modules){
 
 	walker.on('file', function(root, stat, next) {
 	    var current = path.join(root, stat.name);
-		fs.unlinkSync(require('path').resolve(__dirname, current));
+	    try
+	    {
+			fs.unlinkSync(require('path').resolve(__dirname, current));
+	    } catch(e) {
+	    	console.log("Could not delete file: " + require('path').resolve(__dirname, current));
+	    }
 	    next();
 	});
 }

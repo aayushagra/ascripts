@@ -16,6 +16,9 @@ module.exports = {
   		argoscripts.SendMessageToSAMP("/paytoll");
   	}
   },
+  OnNewChatlogStarted: function(data) {
+    
+  },
   OnTick: function(){
   	
   }

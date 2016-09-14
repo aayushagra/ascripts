@@ -1,0 +1,17 @@
+[21:25:21] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:25:24] Connecting to 46.105.234.125:7777...
+[21:25:25] Connected. Joining the game...
+[21:25:30] Connected to {B9C9BF}Argonath RPG
+[21:25:30] {72A8D4}Welcome to Argonath RPG RS5.2!
+[21:25:30] ------------------------------------------------------------------------------------------
+[21:25:30] 1. {72A8D4}This is a roleplay server, please stay within decent realms of roleplay.
+[21:25:30] 2. {72A8D4}Please contact a helper if you have any questions by using the command /h [question]
+[21:25:30] 3. {72A8D4}Please do not deathmatch, carkill, flame or hack on this server, all are punishable.
+[21:25:30] 4. {72A8D4}Treat others as you would want to be treated, you will enjoy playing more!
+[21:25:30] 5. {72A8D4}Our full rules can be found at www.ArgonathRPG.eu or /rules
+[21:25:30] ------------------------------------------------------------------------------------------
+[21:25:30] The login screen will appear shortly. Please wait.
+[21:25:37] You have successfully logged in, Philip_Ancelotti.
+[21:25:37] Philip_Ancelotti(20) has logged into the server.
+[21:25:37] You have joined channel 1335. Owner: Comrey_Ancelotti
+[21:25:37] Channel Message: La Famiglia di Ancelotti

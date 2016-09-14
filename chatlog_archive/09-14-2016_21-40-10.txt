@@ -1,0 +1,13 @@
+[21:40:10] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:40:13] Connecting to 46.105.234.125:7777...
+[21:40:14] Connected. Joining the game...
+[21:40:20] Connected to {B9C9BF}Argonath RPG
+[21:40:20] {72A8D4}Welcome to Argonath RPG RS5.2!
+[21:40:20] ------------------------------------------------------------------------------------------
+[21:40:20] 1. {72A8D4}This is a roleplay server, please stay within decent realms of roleplay.
+[21:40:20] 2. {72A8D4}Please contact a helper if you have any questions by using the command /h [question]
+[21:40:20] 3. {72A8D4}Please do not deathmatch, carkill, flame or hack on this server, all are punishable.
+[21:40:20] 4. {72A8D4}Treat others as you would want to be treated, you will enjoy playing more!
+[21:40:20] 5. {72A8D4}Our full rules can be found at www.ArgonathRPG.eu or /rules
+[21:40:20] ------------------------------------------------------------------------------------------
+[21:40:20] The login screen will appear shortly. Please wait.

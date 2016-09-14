@@ -1,0 +1,25 @@
+[21:27:04] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:27:07] Connecting to 46.105.234.125:7777...
+[21:27:09] Connected. Joining the game...
+[21:27:15] Connected to {B9C9BF}Argonath RPG
+[21:27:15] {72A8D4}Welcome to Argonath RPG RS5.2!
+[21:27:15] ------------------------------------------------------------------------------------------
+[21:27:15] 1. {72A8D4}This is a roleplay server, please stay within decent realms of roleplay.
+[21:27:15] 2. {72A8D4}Please contact a helper if you have any questions by using the command /h [question]
+[21:27:15] 3. {72A8D4}Please do not deathmatch, carkill, flame or hack on this server, all are punishable.
+[21:27:15] 4. {72A8D4}Treat others as you would want to be treated, you will enjoy playing more!
+[21:27:15] 5. {72A8D4}Our full rules can be found at www.ArgonathRPG.eu or /rules
+[21:27:15] ------------------------------------------------------------------------------------------
+[21:27:15] The login screen will appear shortly. Please wait.
+[21:28:42] You have successfully logged in, Philip_Ancelotti.
+[21:28:42] Philip_Ancelotti(9) has logged into the server.
+[21:28:43] You have joined channel 1335. Owner: Comrey_Ancelotti
+[21:28:43] Channel Message: La Famiglia di Ancelotti
+[21:28:46] {FFFFFF}Butters_Cartman{FFFFFF}: (29) how to be cop
+[21:28:49] You are now entering San Fierro city boundaries. Mayor: Sam_Valenti
+[21:28:49] Nounou363(13) has logged into the server.
+[21:29:29] {FFFFFF}Butters_Cartman{FFFFFF}: (29) how to be cop
+[21:29:29] {409FFF}KyleSforza{FFFFFF}: (14) top kop
+[21:30:17] {FFFFFF}SA-MP {B9C9BF}0.3.7 {FFFFFF}Started
+[21:30:39] Connecting to 46.105.234.125:7777...
+[21:30:41] Connected. Joining the game...

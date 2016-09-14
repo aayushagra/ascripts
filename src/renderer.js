@@ -55,7 +55,7 @@ function loadHotkeys(){
 	valuesetter = [];
 	addremovelisterneradd = [];
 	var inputstring = "";
-	obj = JSON.parse(fs.readFileSync('jojo.json', 'utf8'));
+	obj = JSON.parse(fs.readFileSync('../hotkeys.json', 'utf8'));
 
 	for(var i = 0; i < obj.length; i++){
 		ourhotkeys.push(obj[i]["Combination"].slice().sort().join(""));
@@ -95,7 +95,7 @@ function OnRemoveClicked(event){
 }
 
 function saveObjToFile(newobj){
-	fs.writeFileSync("jojo.json", JSON.stringify(newobj, null, 2));
+	fs.writeFileSync("../hotkeys.json", JSON.stringify(newobj, null, 2));
 	console.log(obj);
 	loadHotkeys();
 }
