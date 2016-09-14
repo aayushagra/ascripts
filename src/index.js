@@ -15,10 +15,15 @@ spammy.log = function () {
   //logFile.write(util.format.apply(null, arguments) + '\r\n');
 }
 
+var currentversion = "0.2";
+
 var currentlyexecuting = false;
 var playername = null;
 
 var argoscripts = {
+	GetCurrentVersion: function(){
+		return currentversion;
+	},
 	test: function(){
 		console.log("yo");
 	},
