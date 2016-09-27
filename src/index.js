@@ -57,10 +57,19 @@ var argoscripts = {
 		});*/
 		console.log(command);
 		try{
-			fs.appendFileSync('lockfiles/sendmsg.lock', 't^a{Backspace}'+command+'{ENTER}\n');
-			fs.appendFileSync('lockfiles/sendmsg.log', 't^a{Backspace}'+command+'{ENTER}\n');
+			fs.appendFileSync('lockfiles/sendmsg.lock', command+'\n');
+			fs.appendFileSync('lockfiles/sendmsg.log', command+'\n');
 		}catch(e){
 			console.log("Failed to append to message lockfile: " + command);
+		}
+	},
+	SendMessageLocal: function(command){
+		console.log(command);
+		try{
+			fs.appendFileSync('lockfiles/sendmsgl.lock', command+'\n');
+			fs.appendFileSync('lockfiles/sendmsgl.log', command+'\n');
+		}catch(e){
+			console.log("Failed to append to messageL lockfile: " + command);
 		}
 	}
 };

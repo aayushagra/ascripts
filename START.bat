@@ -22,7 +22,11 @@ if %OS%==64BIT (
 	rem bitsadmin.exe /transfer "Downloading node.exe" https://nodejs.org/dist/v4.5.0/win-x64/node.exe "%cd%\node.exe"
 )
 
-
+IF NOT EXIST "node_modules\electron" (
+	@echo ON
+	call npm install
+	@echo OFF
+)
 
 @echo ON
 

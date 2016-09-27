@@ -22,7 +22,7 @@ module.exports = {
       //console.log(playername);
   		try
   		{
-  			argoscripts.SendMessageToSAMP("/l Result: "+ String(math.eval(line.split(':')[4].trim())));
+  			argoscripts.SendMessageLocal("Result: "+ String(math.eval(line.split(':')[4].trim())));
 		  }
 		  catch(err)
 		  {

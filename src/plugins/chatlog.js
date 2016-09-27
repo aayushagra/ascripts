@@ -3,6 +3,14 @@ var fs = require('fs');
 var argoscripts = {};
 var currentchatlogfile = "";
 
+function mkdirSync (path) {
+  try {
+    fs.mkdirSync(path);
+  } catch(e) {
+    if ( e.code != 'EEXIST' ) throw e;
+  }
+}
+
 function getTodayDate() {
   var today = new Date();
   var dd = today.getDate();
@@ -23,6 +31,7 @@ function getTodayDate() {
 
 module.exports = {
   OnModuleInit: function(fargoscripts){
+    mkdirSync("../chatlog_archive");
   	argoscripts = fargoscripts;
   },
   ListHotkeys: function(){

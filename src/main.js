@@ -41,7 +41,13 @@ function createWindow () {
     win = null
   })
 
+
+
   appIcon = new Tray(iconPath);
+  appIcon.displayBalloon({
+                title:'hello',
+                content:'world'
+            });  
   var contextMenu = Menu.buildFromTemplate([
     { label: 'Show keybinds',
       click: function() {

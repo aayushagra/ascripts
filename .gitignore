@@ -1,3 +1,7 @@
 src/node.exe
+src/node_modules/electron/*
+src/node_modules/mathjs/*
+src/node_modules/username/*
+src/node_modules/walk/*
 
 log.txt

@@ -1,3 +1,4 @@
+#include %A_ScriptDir%\SAMP.ahk
 #SingleInstance ignore
 #HotkeyModifierTimeout 0
 
@@ -9,7 +10,6 @@ sampactive := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
-
 CloseMailWarnings:
    GetKeyState, state, w
    if state = D
@@ -37,10 +37,24 @@ CloseMailWarnings:
         FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\sendmsgtriggered.lock
         Loop, parse, Contents, `n
         {
-            SendInput, %A_LoopField%
+            if A_LoopField = ;
+              continue
+            sendChatMessage(A_LoopField)
         }
-        ;MsgBox, yo
         FileDelete, %A_WorkingDir%\lockfiles\sendmsg.lock
+    }
+
+    FileRead, Contents, %A_WorkingDir%\lockfiles\sendmsgl.lock
+    if not ErrorLevel  ; Successfully loaded.
+    {
+        FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\sendmsgltriggered.lock
+        Loop, parse, Contents, `n
+        {
+            if A_LoopField = ;
+              continue
+            addMessageToChatWindow(A_LoopField)
+        }
+        FileDelete, %A_WorkingDir%\lockfiles\sendmsgl.lock
     }
 
     IfWinActive GTA:SA:MP
