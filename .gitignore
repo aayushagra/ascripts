@@ -3,5 +3,7 @@ src/node_modules/electron/*
 src/node_modules/mathjs/*
 src/node_modules/username/*
 src/node_modules/walk/*
+src/lockfiles/*
+chatlog_archive/*
 
 log.txt
