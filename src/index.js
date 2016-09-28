@@ -19,6 +19,7 @@ var currentversion = "0.2";
 
 var currentlyexecuting = false;
 var playername = null;
+var player_coords = false;
 
 var argoscripts = {
 	GetCurrentVersion: function(){
@@ -71,6 +72,9 @@ var argoscripts = {
 		}catch(e){
 			console.log("Failed to append to messageL lockfile: " + command);
 		}
+	},
+	getCoordinates: function(){
+		return player_coords;
 	}
 };
 
@@ -109,8 +113,10 @@ function main(modules){
 			}
 		}
 
-		//SendTicks(modules);
+		SendTicks(modules);
 		CheckAnyHotkeysPressed(modules);
+		CheckAnyCommandsExecuted(modules);
+		LoadLatestCoordinates();
 		currentlyexecuting = false;
 	}, 25);
 }
@@ -119,6 +125,17 @@ function SendNewChatlogStartedCallbacks(data, modules){
 	spammy.log("SendNewChatlogStartedCallbacks");
 	for(var i = 0; i < modules.length; i++){
 		modules[i].OnNewChatlogStarted(data, windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
+	}
+}
+
+function LoadLatestCoordinates() {
+	spammy.log("LatesCoordLoad");
+	if(LockfileExistsAndAccessible("lastcoords")){
+		result = ReadLockFile("lastcoords");
+		if(result) {
+			result = result.split(",");
+			player_coords = [parseFloat(result[0]),parseFloat(result[1]),parseFloat(result[2])];
+		}
 	}
 }
 
@@ -147,6 +164,26 @@ function yo(){
 	console.log("yo");
 }
 
+function CheckAnyCommandsExecuted(modules)
+{
+	var result;
+	spammy.log("CheckAnyCommandsExecuted");
+	if(LockfileExistsAndAccessible("lastcmd")){
+		result = ReadLockFile("lastcmd");
+		result = result.split("\n");
+		argoscripts.UnsetLockfile("lastcmd");
+		for(var j = 0; j < result.length; j++)
+		{
+			if (result[j] != "")
+			{
+				for(var i = 0; i < modules.length; i++){
+					modules[i].OnCommandRecieved(result[j]);
+				}
+			}
+		}
+	}
+}
+
 function CheckAnyHotkeysPressed(modules){
 	spammy.log("HotkeyExecutedCheck");
 	for(var i = 0; i < hotkeys.length; i++){
@@ -169,14 +206,17 @@ function LockfileExistsAndAccessible(filename){
 		return false;
 	    // It isn't accessible
 	}
-	/*try {
+}
 
-	  stats = fs.statSync(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'));
-	  return true;
-	}
-	catch (e) {
+function ReadLockFile(filename){
+	//console.log(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'));
+	spammy.log("Read: " + filename);
+	try {
+	    var data =  fs.readFileSync(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'), 'utf8');
+	    return data;
+	} catch (e) {
 		return false;
-	}*/
+	}
 }
 
 function KillProcess(process){

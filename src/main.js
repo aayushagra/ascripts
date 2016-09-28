@@ -44,10 +44,10 @@ function createWindow () {
 
 
   appIcon = new Tray(iconPath);
-  appIcon.displayBalloon({
+  /*appIcon.displayBalloon({
                 title:'hello',
                 content:'world'
-            });  
+            });  */
   var contextMenu = Menu.buildFromTemplate([
     { label: 'Show keybinds',
       click: function() {

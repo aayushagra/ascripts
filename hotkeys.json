@@ -31,7 +31,9 @@
       "N/A"
     ],
     "Output": [
-      "/producemeth"
+      "/emath",
+      "/emath",
+      "/emath"
     ]
   },
   {
@@ -48,7 +50,7 @@
   {
     "Combination": [
       "ALT",
-      "3",
+      "Numpad3",
       "N/A",
       "N/A"
     ],

@@ -22,18 +22,27 @@ module.exports = {
       //console.log(playername);
   		try
   		{
-  			argoscripts.SendMessageLocal("Result: "+ String(math.eval(line.split(':')[4].trim())));
+  			argoscripts.SendMessageLocal("Math.js: "+ String(math.eval(line.split(':')[4].trim())));
 		  }
 		  catch(err)
 		  {
-			 console.log("Math error");
+			 argoscripts.SendMessageLocal("ERROR: Invalid syntax");
+       argoscripts.SendMessageLocal("Usage examples: /math 4+4, /math 9*9, /math 40/4, /math 90*(4+5) e.t.c");
 		  }
-	}
+	  }
   },
   OnNewChatlogStarted: function(data) {
     
   },
   OnTick: function(){
   	
+  },
+  OnCommandRecieved: function(cmd){
+    console.log("Recieved: " + cmd);
+    cmd = cmd.split(" ");
+    if(cmd[0] == "/emath")
+    {
+      argoscripts.SendMessageLocal("FUCK OFF");
+    }
   }
 };

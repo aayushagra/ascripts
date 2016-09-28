@@ -58,6 +58,9 @@ module.exports = {
         console.log("Error: Tried checking file while it was being written");
       }*/
   	}
+  },
+  OnCommandRecieved: function(cmd){
+    
   }
 };
 

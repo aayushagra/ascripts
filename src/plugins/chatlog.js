@@ -64,5 +64,8 @@ module.exports = {
   },
   OnTick: function(){
   	
+  },
+  OnCommandRecieved: function(cmd){
+    //console.log("yooo: " + cmd);
   }
 };

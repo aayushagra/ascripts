@@ -83,6 +83,15 @@ CloseMailWarnings:
       lastfilereaddir := "false"
     }
 
+    ; Don't judge me!
+    o := getCoordinates()
+    x := o[1]
+    y := o[2]
+    z := o[3]
+    comma = ,
+    FileDelete, %A_WorkingDir%\lockfiles\lastcoords.lock
+    FileAppend, %x%%comma%%y%%comma%%z%, %A_WorkingDir%\lockfiles\lastcoords.lock
+
 return
 
 #IfWinActive, GTA:SA:MP
@@ -99,8 +108,8 @@ return
 !2 Up::
 	lastfilereaddir := "2ALT"
 return
-!3 Up::
-	lastfilereaddir := "3ALT"
+!numpad3 Up::
+	lastfilereaddir := "ALTNumpad3"
 return
 !4 Up::
 	lastfilereaddir := "4ALT"

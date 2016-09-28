@@ -34,5 +34,8 @@ module.exports = {
   },
   OnTick: function(){
   	
+  },
+  OnCommandRecieved: function(cmd){
+    
   }
 };
