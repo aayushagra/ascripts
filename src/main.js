@@ -6,7 +6,7 @@ const path = require('path');
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 const iconPath = path.join(__dirname, 'icon.png');
-let appIcon = null;
+var appIcon = null;
 
 var argoscripts;
 app.on('window-all-closed', () => {
@@ -27,6 +27,7 @@ function createWindow () {
 
   win.on('close', function(e){
     if(!force_quit){
+      console.log(appIcon);
       win.webContents.executeJavaScript("alert('This panel will be minimized to the tray');");
       e.preventDefault();
       win.hide();
