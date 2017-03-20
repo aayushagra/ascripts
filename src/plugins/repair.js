@@ -52,7 +52,6 @@ module.exports = {
             //setTimeout(suspend.resume(), 3000);
             argoscripts.SendMessageToSAMP("/engine");
             argoscripts.SendMessageToSAMP("/repairvehicle");
-            argoscripts.SendMessageToSAMP("/engine");
           }
         }
       }
