@@ -27,7 +27,7 @@ module.exports = {
 		  catch(err)
 		  {
 			 argoscripts.SendMessageLocal("ERROR: Invalid syntax");
-       argoscripts.SendMessageLocal("Usage examples: /math 4+4, /math 9*9, /math 40/4, /math 90*(4+5) e.t.c");
+       argoscripts.SendMessageLocal("Usage examples: /l math: 4+4, /l math: 9*9, /l math: 40/14, /l math: 90*(4+5) e.t.c");
 		  }
 	  }
   },
