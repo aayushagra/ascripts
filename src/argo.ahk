@@ -114,6 +114,15 @@ return
 !4 Up::
 	lastfilereaddir := "4ALT"
 return
+numpad0 Up::
+	lastfilereaddir := "Numpad0"
+return
+~w::
+	lastfilereaddir := "W"
+return
+~s::
+	lastfilereaddir := "S"
+return
 ^!b Up::
 	lastfilereaddir := "ALTBCTRL"
 return

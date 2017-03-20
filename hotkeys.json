@@ -68,5 +68,18 @@
     "Output": [
       "/collectmeth"
     ]
+  },
+  {
+    "Combination": [
+      "Numpad0",
+      "N/A",
+      "N/A",
+      "N/A"
+    ],
+    "Output": [
+      "/producemeth",
+      "Enter hotkey here (Eg. /engine)",
+      "Enter hotkey here (Eg. /engine)"
+    ]
   }
 ]

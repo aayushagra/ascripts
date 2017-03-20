@@ -31,7 +31,7 @@ module.exports = {
     return [];
   },
   OnChatMessageCaptured: function(line) {
-    
+
   },
   OnNewChatlogStarted: function(data) {
     

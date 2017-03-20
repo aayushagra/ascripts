@@ -231,7 +231,6 @@ function CompileAHKFile(){
 	for(var i = 0; i < hotkeys.length; i++){
 		var ahkstring = "";
 		var releasestring = "";
-		console.log(hotkeys[i][0]);
 		for(var j = 0; j < hotkeys[i][0].length; j++){
 			switch(hotkeys[i][0][j]) {
 				case "CTRL":
@@ -259,7 +258,14 @@ function CompileAHKFile(){
 					break;			
 			}
 		}
+		console.log(hotkeys[i][0]);
 		var appendString = "\n"+ahkstring+" Up::\n\tlastfilereaddir := \""+hotkeys[i][0].join("")+"\"\nreturn";
+		if(hotkeys[i][0][0].localeCompare("W") == 0 || hotkeys[i][0][0].localeCompare("S") == 0)
+		{
+			console.log("triggered");
+			//We don't want to block W or S only hotkeys to avoid blocking movement
+			appendString = appendString.replace("\n"+ahkstring+" Up::", "\n~"+ahkstring+"::");
+		}
 		//var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock"+releasestring+"\nreturn";
 		fs.appendFileSync('argo.ahk', appendString);
 	}
