@@ -22,12 +22,12 @@ module.exports = {
       //console.log(playername);
   		try
   		{
-  			argoscripts.SendMessageLocal("Math.js: "+ String(math.eval(line.split(':')[4].trim())));
+  			argoscripts.SendMessageToSAMP("/l Math.js: "+ String(math.eval(line.split(':')[4].trim())));
 		  }
 		  catch(err)
 		  {
-			 argoscripts.SendMessageLocal("ERROR: Invalid syntax");
-       argoscripts.SendMessageLocal("Usage examples: /l math: 4+4, /l math: 9*9, /l math: 40/14, /l math: 90*(4+5) e.t.c");
+			 argoscripts.SendMessageToSAMP("/l ERROR: Invalid syntax");
+       argoscripts.SendMessageToSAMP("/l Usage examples: /l math: 4+4, /l math: 9*9, /l math: 40/14, /l math: 90*(4+5) e.t.c");
 		  }
 	  }
   },
@@ -42,7 +42,7 @@ module.exports = {
     cmd = cmd.split(" ");
     if(cmd[0] == "/emath")
     {
-      argoscripts.SendMessageLocal("FUCK OFF");
+      argoscripts.SendMessageToSAMP("FUCK OFF");
     }
   }
 };
