@@ -1,4 +1,5 @@
 src/lockfiles/*
+src/plugins/recorder.js
 chatlog_archive/*
 
-log.txt
+log*.txt
