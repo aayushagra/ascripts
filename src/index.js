@@ -3,9 +3,7 @@ var math = require('mathjs');
 var path = require('path'),
     walk = require('walk');
 
-var windows_homedir = require('os').homedir();
-
-var chatlogfile = FindChatlogFile(windows_homedir);
+var chatlogfile = FindChatlogFile();
 
 console.log("FILE FOUND AT " + chatlogfile)
 
@@ -19,14 +17,14 @@ function FileExistsAndAccessible(file)
 	}
 }
 
-function FindChatlogFile(homedir)
+function FindChatlogFile()
 {
+	var windows_homedir = require('os').homedir();
+
 	var known_locations = [
 		windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt",
 		windows_homedir+"\\OneDrive\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt"
 	];
-
-	var found_at = null;
 
 	for (var i = 0; i < known_locations.length; i++)
 	{
@@ -34,7 +32,6 @@ function FindChatlogFile(homedir)
 	}
 
 	throw "ERROR: CHATLOG FILE NOT FOUND";
-	return null;
 }
 
 var hotkeys = [];
@@ -151,7 +148,7 @@ function main(modules){
 function SendNewChatlogStartedCallbacks(data, modules){
 	spammy.log("SendNewChatlogStartedCallbacks");
 	for(var i = 0; i < modules.length; i++){
-		modules[i].OnNewChatlogStarted(data, windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
+		modules[i].OnNewChatlogStarted(data, chatlogfile);
 	}
 }
 
@@ -180,12 +177,10 @@ function LoadLatestCoordinates() {
 }
 
 function CheckForPlayerName(data) {
-	//console.log(line.match());
 	var lines = data.split(/\r?\n/);
 	//This is excessive 
 	for (var i = 0; i < lines.length; i++)
 	{
-		//console.log(lines[i]);
 		if(lines[i].match(/^\[\d\d:\d\d:\d\d\] You have successfully logged in,/) !== null ||
 		   lines[i].match(/^\[\d\d:\d\d:\d\d\] Welcome back, /) !== null) { //Welcome back msg is shown to admins
 			var split = lines[i].split(" ");
@@ -194,14 +189,6 @@ function CheckForPlayerName(data) {
 		}
 
 	}
-	if(data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./) !== null){
-		//console.log(data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./)[1]);
-		//playername = data.match(/\[\d\d:\d\d:\d\d\] You have successfully logged in, (.+)\./)[1];
-	}
-}
-
-function yo(){
-	console.log("yo");
 }
 
 function CheckAnyCommandsExecuted(modules)
@@ -254,13 +241,7 @@ function ReadLockFile(filename){
 	}
 }
 
-function KillProcess(process){
-	spammy.log("KillProcess");
-	process.kill('SIGINT');
-}
-
 function CompileAHKFile(){
-	//RegisterHotkey(["CTRL", "ALT", "A"]);
 	spammy.log("CompileAHKFile");
 	fs.writeFileSync('argo.ahk', fs.readFileSync('base.ahk'));
 	for(var i = 0; i < hotkeys.length; i++){
