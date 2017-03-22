@@ -37,25 +37,28 @@ module.exports = {
     
   },
   OnTick: function(){
-    var insidenopns = true;
-    if(argoscripts.getCoordinates != false) //Coordinates have been loaded
-  	{
-      var coords = argoscripts.getCoordinates();
-      for(var i = 0; i < paynsprays.length; i++)
+    if (argoscripts.isPlayerDriver())
+    {
+      var insidenopns = true;
+      if(argoscripts.getCoordinates != false) //Coordinates have been loaded
       {
-        if(distanceBetweenPoints(coords, paynsprays[i]) <= 5)
+        var coords = argoscripts.getCoordinates();
+        for(var i = 0; i < paynsprays.length; i++)
         {
-          insidenopns = false;
-          if(!inpns)
+          if(distanceBetweenPoints(coords, paynsprays[i]) <= 5)
           {
-            inpns = true;
-            //setTimeout(suspend.resume(), 3000);
-            argoscripts.SendMessageToSAMP("/engine");
-            argoscripts.SendMessageToSAMP("/repairvehicle");
+            insidenopns = false;
+            if(!inpns)
+            {
+              inpns = true;
+              //setTimeout(suspend.resume(), 3000);
+              argoscripts.SendMessageToSAMP("/engine");
+              argoscripts.SendMessageToSAMP("/repairvehicle");
+            }
           }
         }
+        if(insidenopns == true) inpns = false;
       }
-      if(insidenopns == true) inpns = false;
     }
   },
   OnCommandRecieved: function(cmd){

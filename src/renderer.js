@@ -20,7 +20,6 @@ function generateSelectBlock(num, blockid, hotkey){
 }
 
 function generateTextboxes(blockid, hkarray){
-	//return "<div class=\"col-xs-8\"><input type=\"text\" class=\"form-control\" value=\""+string+"\" aria-describedby=\"basic-addon2\" id=hotkey_"+String(blockid)+"></div>";
 	var istring = "";
 	istring += "<div class=\"col-xs-8\">";
 	for (var i = 0; i < hkarray.length; i++){
@@ -123,7 +122,6 @@ function saveRows(quiet){ //NOTE: When javascript calls this function it'll pass
 			success = false;
 			break;
 		}
-		//console.log("length: "+obj[i]["Output"]);
 		for(var j = 0; j < obj[i]["Output"].length; j++){
 			temptextarray.push($("#hotkey_"+String(i)+"_"+j).val());
 		}

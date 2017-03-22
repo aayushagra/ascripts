@@ -7,6 +7,7 @@ FileCreateDir, %A_WorkingDir%\lockfiles
 
 global lastfilereaddir := "false"
 sampactive := 0
+isdriver := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
@@ -81,6 +82,26 @@ CloseMailWarnings:
     {
       FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\hotkey_%lastfilereaddir%.lock
       lastfilereaddir := "false"
+    }
+
+    if (isPlayerDriver() = 1)
+    {
+        if (isdriver = 0)
+        {
+            isdriver := 1
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\isdriver.lock
+            FileDelete, %A_WorkingDir%\lockfiles\isnotdriver.lock
+        }
+    }
+
+    if not (isPlayerDriver() = 1)
+    {
+        if (isdriver = 1)
+        {
+            isdriver := 0
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\isnotdriver.lock
+            FileDelete, %A_WorkingDir%\lockfiles\isdriver.lock
+        }
     }
 
     ; Don't judge me!

@@ -1,12 +1,42 @@
-//Future note: I deleted the elctron download folder from electron's directory in nodemodules since it didn't fit into git
-//No known bugs caused, might have to be redeleted on updating
-
 var fs = require('fs');
 var math = require('mathjs');
 var path = require('path'),
     walk = require('walk');
 
 var windows_homedir = require('os').homedir();
+
+var chatlogfile = FindChatlogFile(windows_homedir);
+
+console.log("FILE FOUND AT " + chatlogfile)
+
+function FileExistsAndAccessible(file)
+{
+	try {
+	    fs.accessSync(file, fs.F_OK);
+	    return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+function FindChatlogFile(homedir)
+{
+	var known_locations = [
+		windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt",
+		windows_homedir+"\\OneDrive\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt"
+	];
+
+	var found_at = null;
+
+	for (var i = 0; i < known_locations.length; i++)
+	{
+		if (FileExistsAndAccessible(known_locations[i]))	return known_locations[i];
+	}
+
+	throw "ERROR: CHATLOG FILE NOT FOUND";
+	return null;
+}
+
 var hotkeys = [];
 var hotkeys_jsonstring = ""; //Used for efficiently checking if a hotkey is registered
 
@@ -18,15 +48,16 @@ spammy.log = function () {
 var currentversion = "0.2";
 
 var currentlyexecuting = false;
+
 var playername = null;
+
 var player_coords = false;
+
+var isdriver = false;
 
 var argoscripts = {
 	GetCurrentVersion: function(){
 		return currentversion;
-	},
-	test: function(){
-		console.log("yo");
 	},
 	SetLockFile: function(name, data){
 		spammy.log("Setlockfile: " + name);
@@ -35,8 +66,7 @@ var argoscripts = {
 			    if(err) {
 			        return console.log(err);
 			    }
-			}); 
-			//fs.closeSync(fs.openSync(require('path').resolve(__dirname, 'lockfiles/'+name+'.lock'), 'w'));
+			});
 		}catch(e){
 			setTimeout(SetLockfile, 100, name);
 			console.log("Failed to set lockfile: " + name);
@@ -48,14 +78,9 @@ var argoscripts = {
 			fs.unlinkSync(require('path').resolve(__dirname, 'lockfiles/'+name+'.lock'));
 		}catch(e){
 			console.log("Failed to delete lockfile: " + name);
-			//setTimeout(UnsetLockfile, 100, name);
 		}
 	},
 	SendMessageToSAMP: function(command){
-		/*argoscripts.SetLockFile("sendmsg", "");
-		process.nextTick(function(){
-		    console.log("This will be printed later");
-		});*/
 		console.log(command);
 		try{
 			fs.appendFileSync('lockfiles/sendmsg.lock', command+'\n');
@@ -75,6 +100,9 @@ var argoscripts = {
 	},
 	getCoordinates: function(){
 		return player_coords;
+	},
+	isPlayerDriver: function(){
+		return isdriver;
 	}
 };
 
@@ -84,10 +112,9 @@ function main(modules){
 	CompileAHKFile();
 	console.log("MAIN CALLED");
 	console.log("Loaded " + modules.length + " plugins");
-	console.log(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
-	var data =  fs.readFileSync(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
+	console.log(chatlogfile);
+	var data =  fs.readFileSync(chatlogfile, 'utf8');
 	SendNewChatlogStartedCallbacks(data, modules);
-	//var data =  fs.readFileSync("D:\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
 	var chatlog_pointer = GetLineCount(data);
 
 	var last_data = data;
@@ -96,8 +123,7 @@ function main(modules){
 		if(currentlyexecuting == true) return 1;
 		currentlyexecuting = true;
 		last_data = data;
-		data =  fs.readFileSync(windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
-		//data =  fs.readFileSync("D:\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt", 'utf8');
+		data =  fs.readFileSync(chatlogfile, 'utf8');
 		if(data.length < last_data.length){
 			chatlog_pointer = 0; //New game started
 			console.log("New game started");
@@ -117,6 +143,7 @@ function main(modules){
 		CheckAnyHotkeysPressed(modules);
 		CheckAnyCommandsExecuted(modules);
 		LoadLatestCoordinates();
+		CheckIfDrivingAnyVehicle();
 		currentlyexecuting = false;
 	}, 25);
 }
@@ -125,6 +152,19 @@ function SendNewChatlogStartedCallbacks(data, modules){
 	spammy.log("SendNewChatlogStartedCallbacks");
 	for(var i = 0; i < modules.length; i++){
 		modules[i].OnNewChatlogStarted(data, windows_homedir+"\\Documents\\GTA San Andreas User Files\\SAMP\\chatlog.txt");
+	}
+}
+
+function CheckIfDrivingAnyVehicle()
+{
+	spammy.log("CheckIfDriving");
+
+	if(LockfileExistsAndAccessible("isdriver")){
+		isdriver = true;
+	}
+
+	if(LockfileExistsAndAccessible("isnotdriver")){
+		isdriver = false;
 	}
 }
 
@@ -188,7 +228,6 @@ function CheckAnyHotkeysPressed(modules){
 	spammy.log("HotkeyExecutedCheck");
 	for(var i = 0; i < hotkeys.length; i++){
 		if(LockfileExistsAndAccessible("hotkey_"+hotkeys[i][0].join(""))){
-			//console.log(hotkeys);
 			argoscripts.UnsetLockfile("hotkey_"+hotkeys[i][0].join(""));
 			hotkeys[i][1][hotkeys[i][2]](hotkeys[i][0].join("")); //2nd parameter is the module that registered hotkey, 3rd parameter is the name of function inside that module
 		}
@@ -196,20 +235,16 @@ function CheckAnyHotkeysPressed(modules){
 }
 
 function LockfileExistsAndAccessible(filename){
-	//console.log(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'));
 	spammy.log("Existcheck: " + filename);
 	try {
 	    fs.accessSync(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'), fs.F_OK);
 	    return true;
-	    // Do something
 	} catch (e) {
 		return false;
-	    // It isn't accessible
 	}
 }
 
 function ReadLockFile(filename){
-	//console.log(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'));
 	spammy.log("Read: " + filename);
 	try {
 	    var data =  fs.readFileSync(require('path').resolve(__dirname, 'lockfiles/'+filename+'.lock'), 'utf8');
@@ -230,28 +265,19 @@ function CompileAHKFile(){
 	fs.writeFileSync('argo.ahk', fs.readFileSync('base.ahk'));
 	for(var i = 0; i < hotkeys.length; i++){
 		var ahkstring = "";
-		var releasestring = "";
 		for(var j = 0; j < hotkeys[i][0].length; j++){
 			switch(hotkeys[i][0][j]) {
 				case "CTRL":
-					releasestring += "\n\tKeyWait, Ctrl"
 					ahkstring = "^" + ahkstring;
-					//ahkstring += "^";
 					break;
 				case "WIN":
-					//releasestring += "{ Up}"; //Currently nothing since there are two windows keys and no global Win key according to ahk's docs and we dont wanna accidentally trigger a hotkey on the wrong one
 					ahkstring = "#" + ahkstring;
-					//ahkstring += "#";
 					break;
 				case "ALT":
-					releasestring += "\n\tKeyWait, Alt";
 					ahkstring = "!" + ahkstring;
-					//ahkstring += "!";
 					break;
 				case "SHIFT":
-					releasestring += "\n\tKeyWait, Shift";
 					ahkstring = "+" + ahkstring;
-					//ahkstring += "+";
 					break;
 				default:
 					ahkstring += hotkeys[i][0][j].toLowerCase();	
@@ -266,27 +292,17 @@ function CompileAHKFile(){
 			//We don't want to block W or S only hotkeys to avoid blocking movement
 			appendString = appendString.replace("\n"+ahkstring+" Up::", "\n~"+ahkstring+"::");
 		}
-		//var appendString = "\n"+ahkstring+"::\n\tFileAppend, This is a blank line`n, %A_WorkingDir%\\lockfiles\\hotkey_"+hotkeys[i][0].join("")+".lock"+releasestring+"\nreturn";
 		fs.appendFileSync('argo.ahk', appendString);
 	}
 	setTimeout(ReloadAHKFile, 2000);
-	//require("child_process").exec('argo.ahk').unref();
 }
 
 function ReloadAHKFile(){
 	argoscripts.SetLockFile("reloadahk");
-	/*const exec = require('child_process').exec;
-	var cmd = exec('argo.ahk');
-	setInterval(KillProcess, 300, cmd);*/
-	/*var cp = require("child_process");
-	cp.exec("argo.ahk"); // notice this without a callback..
-	cp.exit(0); // exit this nodejs process*//*
-	//require("child_process").exec('argo.ahk').unref();*/
 }
 
 
 function RegisterHotkey(hotkeyarray, module, fname){
-	//console.log(hotkeyarray);
 	spammy.log("RegisterHotkey");
 	hotkeyarray.sort(); //Necessary to ensure that even if parameters are passed in different order they're still detected
 	var hotkeyarray_jsonstring = JSON.stringify(hotkeyarray);
@@ -323,7 +339,6 @@ function ClearLockFiles(modules){
 }
 
 function SendChatMessageCallbacks(modules, line){
-	//console.log(playername);
 	if(playername == null) return 1; //No messages are sent till the player name is set
 	spammy.log("SendChatMessageCallbacks");
 	for(var i = 0; i < modules.length; i++){
@@ -366,18 +381,10 @@ function findModules(folder,done){
     });
 }
 
-/*findModules({
-    folder: 'plugins',
-    filter: undefined // either undefined or a filter function for module names
-}, function(modules){
-	//main(modules);
-});*/
-
 var counter = 0; //Number of different findModules calls. If more plugins are loaded from other folders, increate the counter condition below
 var modules_array = [];
 function concatAndExecute(modules){
 	modules_array = modules_array.concat(modules);
-	//console.log(modules_array.length);
 	if(counter == 1){
 		main(modules_array);
 	}
@@ -390,7 +397,6 @@ findModules('plugins_system', concatAndExecute);
 
 exports.checkHotkeyExists = function(hotkeyarray){
 	hotkeyarray = hotkeyarray.filter(function(e) { return e !== 'N/A' })
-	//console.log(hotkeyarray);
 	hotkeyarray.sort(); //Necessary to ensure that even if parameters are passed in different order they're still detected
 	var hotkeyarray_jsonstring = JSON.stringify(hotkeyarray);
 	if(hotkeys_jsonstring.indexOf(hotkeyarray_jsonstring) != -1) return true;
