@@ -46,10 +46,7 @@ module.exports = {
     return [];
   },
   OnChatMessageCaptured: function(line) {
-    if (line.match(/^\[(\d+:)+\d+\] Guard says: Welcome /) !== null) {
-      console.log(line.match(/^\[(\d+:)+\d+\] Guard says: Welcome /)[0]);
-  		argoscripts.SendMessageToSAMP("/paytoll");
-  	}
+
   },
   OnNewChatlogStarted: function(data) {
     
