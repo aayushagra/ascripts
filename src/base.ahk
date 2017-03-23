@@ -8,6 +8,7 @@ FileCreateDir, %A_WorkingDir%\lockfiles
 global lastfilereaddir := "false"
 sampactive := 0
 isdriver := 0
+chatisopen := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
@@ -101,6 +102,26 @@ CloseMailWarnings:
             isdriver := 0
             FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\isnotdriver.lock
             FileDelete, %A_WorkingDir%\lockfiles\isdriver.lock
+        }
+    }
+
+    if (isInChat() = 1)
+    {
+        if (chatisopen = 0)
+        {
+            chatisopen := 1
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\chatisopen.lock
+            FileDelete, %A_WorkingDir%\lockfiles\chatisnotopen.lock
+        }
+    }
+
+    if not (isInChat() = 1)
+    {
+        if (chatisopen = 1)
+        {
+            chatisopen := 0
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\chatisnotopen.lock
+            FileDelete, %A_WorkingDir%\lockfiles\chatisopen.lock
         }
     }
 

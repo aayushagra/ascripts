@@ -45,10 +45,13 @@ module.exports = {
 
     if (engine_state == 0)
     {
-      if (last_init_engine_detected + 2000 < Date.now())
+      if (argoscripts.isChatOpen() == false)
       {
-        argoscripts.SendMessageToSAMP('/engine');
-        last_init_engine_detected = Date.now();
+        if (last_init_engine_detected + 2000 < Date.now())
+        {
+          argoscripts.SendMessageToSAMP('/engine');
+          last_init_engine_detected = Date.now();
+        }
       }
     }
   },

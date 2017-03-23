@@ -52,6 +52,8 @@ var player_coords = false;
 
 var isdriver = false;
 
+var chatisopen = false;
+
 var argoscripts = {
 	GetCurrentVersion: function(){
 		return currentversion;
@@ -100,6 +102,9 @@ var argoscripts = {
 	},
 	isPlayerDriver: function(){
 		return isdriver;
+	},
+	isChatOpen: function(){
+		return chatisopen;
 	}
 };
 
@@ -141,6 +146,7 @@ function main(modules){
 		CheckAnyCommandsExecuted(modules);
 		LoadLatestCoordinates();
 		CheckIfDrivingAnyVehicle();
+		CheckIfChatIsOpen();
 		currentlyexecuting = false;
 	}, 25);
 }
@@ -149,6 +155,19 @@ function SendNewChatlogStartedCallbacks(data, modules){
 	spammy.log("SendNewChatlogStartedCallbacks");
 	for(var i = 0; i < modules.length; i++){
 		modules[i].OnNewChatlogStarted(data, chatlogfile);
+	}
+}
+
+function CheckIfChatIsOpen()
+{
+	spammy.log("CheckIfInChat");
+
+	if(LockfileExistsAndAccessible("chatisopen")){
+		chatisopen = true;
+	}
+
+	if(LockfileExistsAndAccessible("chatisnotopen")){
+		chatisopen = false;
 	}
 }
 

@@ -8,6 +8,7 @@ FileCreateDir, %A_WorkingDir%\lockfiles
 global lastfilereaddir := "false"
 sampactive := 0
 isdriver := 0
+chatisopen := 0
 #Persistent
 SetTimer, CloseMailWarnings, 50
 return
@@ -104,6 +105,26 @@ CloseMailWarnings:
         }
     }
 
+    if (isInChat() = 1)
+    {
+        if (chatisopen = 0)
+        {
+            chatisopen := 1
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\chatisopen.lock
+            FileDelete, %A_WorkingDir%\lockfiles\chatisnotopen.lock
+        }
+    }
+
+    if not (isInChat() = 1)
+    {
+        if (chatisopen = 1)
+        {
+            chatisopen := 0
+            FileAppend, This is a blank line`n, %A_WorkingDir%\lockfiles\chatisnotopen.lock
+            FileDelete, %A_WorkingDir%\lockfiles\chatisopen.lock
+        }
+    }
+
     ; Don't judge me!
     o := getCoordinates()
     x := o[1]
@@ -119,24 +140,6 @@ return
 
 !e Up::
 	lastfilereaddir := "ALTE"
-return
-!r Up::
-	lastfilereaddir := "ALTR"
-return
-!1 Up::
-	lastfilereaddir := "1ALT"
-return
-!2 Up::
-	lastfilereaddir := "2ALT"
-return
-!numpad3 Up::
-	lastfilereaddir := "ALTNumpad3"
-return
-!4 Up::
-	lastfilereaddir := "4ALT"
-return
-numpad0 Up::
-	lastfilereaddir := "Numpad0"
 return
 ~w::
 	lastfilereaddir := "W"

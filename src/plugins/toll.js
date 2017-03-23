@@ -52,23 +52,26 @@ module.exports = {
     
   },
   OnTick: function(){
-	  var insidenotoll = true;
-    if(argoscripts.getCoordinates != false) //Coordinates have been loaded
+    if (argoscripts.isPlayerDriver())
     {
-      var coords = argoscripts.getCoordinates();
-      for(var i = 0; i < tolls.length; i++)
+      var insidenotoll = true;
+      if(argoscripts.getCoordinates != false) //Coordinates have been loaded
       {
-        if(distanceBetweenPoints(coords, tolls[i]) <= tolls[i][3])
+        var coords = argoscripts.getCoordinates();
+        for(var i = 0; i < tolls.length; i++)
         {
-          insidenotoll = false;
-          if(!intoll)
+          if(distanceBetweenPoints(coords, tolls[i]) <= tolls[i][3])
           {
-            intoll = true;
-            argoscripts.SendMessageToSAMP("/paytoll");
+            insidenotoll = false;
+            if(!intoll)
+            {
+              intoll = true;
+              argoscripts.SendMessageToSAMP("/paytoll");
+            }
           }
         }
+        if(insidenotoll == true) intoll = false;
       }
-      if(insidenotoll == true) intoll = false;
     }
   },
   OnCommandRecieved: function(cmd){
