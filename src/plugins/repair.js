@@ -31,7 +31,13 @@ module.exports = {
     return [];
   },
   OnChatMessageCaptured: function(line) {
+    if (line.match(/^\[(\d+:)+\d+\] Where you going pal\?! The repair wasn't done yet!/) !== null) {
+      argoscripts.SendMessageToSAMP("/engine");
+    }
 
+    if (line.match(/^\[(\d+:)+\d+\] Your vehicle has been repaired/) !== null) {
+      argoscripts.SendMessageToSAMP("/engine");
+    }
   },
   OnNewChatlogStarted: function(data) {
     
